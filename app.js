@@ -41,7 +41,8 @@ var row = [];
 app.get('/', (req, res) => {
     conn.query('SELECT * FROM students;', (err, rows) => {
         if (!err) {
-            res.render('index', { rows });
+            let removedUserMessage = req.query.removed;
+            res.render('index', { rows, message: removedUserMessage });
         } else {
             console.log(err);
         }
@@ -64,7 +65,7 @@ app.post('/', (req, res) => {
 
 // Create new student
 app.get('/add', (req, res) => {
-    res.render('add', { row, message: message});
+    res.render('add', { row, message: message });
 });
 
 // Add new student
@@ -85,7 +86,7 @@ app.post('/add', (req, res) => {
 app.get('/edit/:id', (req, res) => {
     conn.query('SELECT * FROM students WHERE id = ? ;', [req.params.id], (err, rows) => {
         if (!err) {
-            res.render('edit', { rows, message: message});
+            res.render('edit', { rows, message: message });
         } else {
             console.log(err);
         }
@@ -101,7 +102,7 @@ app.post('/edit/:id', (req, res) => {
         if (!err) {
             conn.query('SELECT * FROM students WHERE id = ? ;', [req.params.id], (err, rows) => {
                 if (!err) {
-                    res.render('edit', { rows, message: 'Student record has been updated successfully!'});
+                    res.render('edit', { rows, message: 'Student record has been updated successfully!' });
                 } else {
                     console.log(err);
                 }
@@ -116,7 +117,7 @@ app.post('/edit/:id', (req, res) => {
 
 // View details
 app.get('/view/:id', (req, res) => {
-    conn.query('SELECT firstname, lastname, DATE_FORMAT(dateOfBirth, "%d %M %Y") AS `dateOfBirth`, email, phoneNumber, department, status FROM students WHERE id = ?',[req.params.id],  (err, rows) => {
+    conn.query('SELECT firstname, lastname, DATE_FORMAT(dateOfBirth, "%d %M %Y") AS `dateOfBirth`, email, phoneNumber, department, status FROM students WHERE id = ?', [req.params.id], (err, rows) => {
         if (!err) {
             res.render('view', { rows });
         } else {
@@ -130,7 +131,8 @@ app.get('/view/:id', (req, res) => {
 app.get('/delete/:id', (req, res) => {
     conn.query('DELETE FROM students WHERE id = ?', [req.params.id], (err, rows) => {
         if (!err) {
-            res.redirect('/');
+            let removedUserMessage = encodeURIComponent('Student record has been removed!');
+            res.redirect('/?removed=' + removedUserMessage);
         } else {
             console.log(err);
         }
