@@ -1,0 +1,42 @@
+<div class="col-5">
+    <label for="firstname" class="form-label">First name</label>
+    <input type="text" class="form-control" id="firstname" value="<%=row.firstname %>" name="firstname" required>
+</div>
+
+<div class="col-5">
+    <label for="lastname" class="form-label">Last name</label>
+    <input type="text" class="form-control" id="lastname" value="<%=row.lastname %>" name="lastname" required>
+</div>
+
+<div class="col-2">
+    <label for="dateOfBirth" class="form-label">Date of birth</label>
+    <input type="date" class="form-control" id="dateOfBirth" value="<%=row.dateOfBirth %>" name="dateOfBirth" required>
+</div>
+
+<div class="col-6">
+    <label for="email" class="form-label">Email</label>
+    <input type="email" class="form-control" id="email" value="<%=row.email %>" name="email" required>
+</div>
+
+<div class="col-6">
+    <label for="phoneNumber" class="form-label">Phone number</label>
+    <input type="text" class="form-control" id="phoneNumber" value="<%=row.phoneNumber %>" name="phoneNumber" required>
+</div>
+
+<div class="col-6">
+    <label for="department" class="form-label">Department</label>
+    <input type="text" class="form-control" id="department" value="<%=row.department %>" name="department" required>
+</div>
+
+<div class="col-6">
+    <label for="status" class="form-label">Status</label>
+    <select class="form-select" id="status" value="<%=row.status  %> " name="status" required>
+        <option selected value="Foundation">Foundation</option>
+        <option value="Undergraduate">Undergraduate</option>
+        <option value="Postgraduate">Postgraduate</option>
+    </select>
+</div>
+
+<div class="col-12 d-flex justify-content-center">
+    <button class="btn btn-primary" type="submit">Save</button>
+</div>
